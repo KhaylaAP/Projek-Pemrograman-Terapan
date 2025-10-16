@@ -15,3 +15,13 @@
 2372039 – Khayla Allegra Pratama : Ngebuat database 
 
 2372059 – Syahrial Achmad : Ngebuat desain UI di Figma
+
+-------------------------------------------------------------------------------------------------------
+
+13 Oct 2025 - 17 Oct 2025
+
+2372011 – Elika Natalie : Membuat halaman-halaman html
+
+2372039 – Khayla Allegra Pratama : Membuat file-file model
+
+2372059 – Syahrial Achmad : Membuat routing untuk halaman-halaman

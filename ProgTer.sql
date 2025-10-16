@@ -26,8 +26,10 @@ CREATE TABLE `Inventory` (
   `id_inventory` int NOT NULL AUTO_INCREMENT,
   `id_produk` int NOT NULL,
   `tipe_jeans` varchar(100) NOT NULL,
-  `ukuran` varchar(20) NOT NULL,
+  `total_jmlh_ukuran` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `kuantitas` varchar(100) NOT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT NULL,
+  `UPDATED_AT` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_inventory`),
   KEY `Inventory_Produk_FK` (`id_produk`),
   CONSTRAINT `Inventory_Produk_FK` FOREIGN KEY (`id_produk`) REFERENCES `Produk` (`id_produk`)
@@ -54,6 +56,8 @@ CREATE TABLE `Kategori` (
   `id_kategori` int NOT NULL AUTO_INCREMENT,
   `nama_kategori` varchar(100) NOT NULL,
   `deskripsi` text NOT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT NULL,
+  `UPDATED_AT` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_kategori`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -84,6 +88,9 @@ CREATE TABLE `Produk` (
   `ukuran` varchar(20) DEFAULT NULL,
   `harga` float NOT NULL,
   `jumlah_stok` int NOT NULL,
+  `status_display` varchar(20) DEFAULT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT NULL,
+  `UPDATED_AT` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_produk`),
   UNIQUE KEY `Produk_UNIQUE` (`kode_produk`),
   KEY `Produk_Kategori_FK` (`id_kategori`),
@@ -115,6 +122,8 @@ CREATE TABLE `Supplier` (
   `email` varchar(100) NOT NULL,
   `no_telp` varchar(20) NOT NULL,
   `notes` text,
+  `CREATED_AT` timestamp NULL DEFAULT NULL,
+  `UPDATED_AT` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_supplier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-10  4:44:50
+-- Dump completed on 2025-10-17  4:59:21
