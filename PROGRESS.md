@@ -25,3 +25,13 @@
 2372039 – Khayla Allegra Pratama : Membuat file-file model
 
 2372059 – Syahrial Achmad : Membuat routing untuk halaman-halaman
+
+-------------------------------------------------------------------------------------------------------
+
+20 Oct 2025 - 24 Oct 2025
+
+2372011 – Elika Natalie : Melanjut membuat halaman-halaman html
+
+2372039 – Khayla Allegra Pratama : Membuat file awal docker untuk docker compose
+
+2372059 – Syahrial Achmad : Membuat file-file controller
