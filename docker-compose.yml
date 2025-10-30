@@ -1,0 +1,50 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - SERVER_PORT=3000
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=app_user
+      - MYSQL_PASSWORD=app_password
+      - MYSQL_DATABASE=ProgTer
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+    command: >
+      sh -c "
+        echo 'Waiting for MySQL to be ready...' &&
+        while ! nc -z mysql 3306; do
+          sleep 1
+        done &&
+        echo 'MySQL is ready! Starting application...' &&
+        node index.js
+      "
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234567890
+      MYSQL_DATABASE: ProgTer
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./ProgTer.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p1234567890"]
+      timeout: 20s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  mysql_data:

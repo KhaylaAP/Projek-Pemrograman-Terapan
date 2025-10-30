@@ -1,4 +1,4 @@
-const Kategori = require('../models/Kategori');
+const Kategori = require('../model/Kategori');
 const kategoriModel = new Kategori();
 
 const kategoriController = {

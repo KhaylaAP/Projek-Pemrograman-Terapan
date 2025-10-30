@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const dbConfig = require('../config/mysql.config')
 
 class Supplier {
@@ -44,7 +44,6 @@ class Supplier {
     `;
     const values = [
       supplier.nama_supplier,
-      supplier.deskripsi,
       supplier.email,
       supplier.no_telp,
       supplier.notes
@@ -70,8 +69,8 @@ class Supplier {
   }
 
   update(id, data, callback) {
-    const sql = 'UPDATE supplier SET nama_supplier = ?, deskripsi = ?, email = ?, no_telp = ?, notes = ? WHERE id_supplier = ?';
-    const values = [data.nama_supplier, data.deskripsi, data.email, data.no_telp, data.notes];
+    const sql = 'UPDATE supplier SET nama_supplier = ?, email = ?, no_telp = ?, notes = ? WHERE id_supplier = ?';
+    const values = [data.nama_supplier, data.email, data.no_telp, data.notes];
     this.db.query(sql, values, callback);
   }
   delete(id, callback) {

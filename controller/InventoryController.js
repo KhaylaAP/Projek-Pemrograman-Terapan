@@ -1,4 +1,4 @@
-const Inventory = require('../models/Inventory');
+const Inventory = require('../model/Inventory');
 
 // Controller Inventory
 const inventoryController = {

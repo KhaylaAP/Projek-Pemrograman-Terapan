@@ -1,5 +1,5 @@
 // controllers/supplierController.js
-const Supplier = require('../models/Supplier');
+const Supplier = require('../model/Supplier');
 
 const supplierController = {
   // [GET] /supplier

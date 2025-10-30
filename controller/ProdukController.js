@@ -1,7 +1,7 @@
 // controllers/produkController.js
-const Produk = require('../models/Produk');
-const Kategori = require('../models/Kategori');
-const Supplier = require('../models/Supplier');
+const Produk = require('../model/Produk');
+const Kategori = require('../model/Kategori');
+const Supplier = require('../model/Supplier');
 
 const produkController = {
   // [GET] /produk

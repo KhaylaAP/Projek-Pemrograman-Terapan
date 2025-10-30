@@ -4,10 +4,10 @@ const path = require('path');
 const router = express.Router();
 
 // import controller
-const produkController = require('../controllers/produkController');
-const supplierController = require('../controllers/supplierController');
-const kategoriController = require('../controllers/kategoriController');
-const inventoryController = require('../controllers/inventoryController');
+const produkController = require('../controller/ProdukController');
+const supplierController = require('../controller/SupplierController');
+const kategoriController = require('../controller/KategoriController');
+const inventoryController = require('../controller/InventoryController');
 
 // folder public untuk file statis (gambar, css, js frontend)
 router.use(express.static('public'));
