@@ -13,7 +13,7 @@ class Kategori {
      all (callback) {
     const query = `
       SELECT id_kategori, nama_kategori, deskripsi, CREATED_AT, UPDATED_AT
-      FROM kategori
+      FROM Kategori
     `;
     this.db.query(query, (err, results) => {
       if (err) {
@@ -37,7 +37,7 @@ class Kategori {
 
   save (kategori, callback) {
     const query = `
-      INSERT INTO kategori (nama_kategori, deskripsi)
+      INSERT INTO Kategori (nama_kategori, deskripsi)
       VALUES (?, ?)
     `;
     const values = [
@@ -57,7 +57,7 @@ class Kategori {
   }
 
   find(id, callback) {
-    const sql = 'SELECT * FROM kategori WHERE id_kategori = ?';
+    const sql = 'SELECT * FROM Kategori WHERE id_kategori = ?';
     this.db.query(sql, [id], (err, rows) => {
       if (err) return callback(err);
       callback(null, rows[0]);
@@ -65,12 +65,12 @@ class Kategori {
   }
 
   update(id, data, callback) {
-    const sql = 'UPDATE kategori SET nama_kategori = ?, deskripsi = ? WHERE id_kategori = ?';
+    const sql = 'UPDATE Kategori SET nama_kategori = ?, deskripsi = ? WHERE id_kategori = ?';
     const values = [data.nama_kategori, data.deskripsi];
     this.db.query(sql, values, callback);
   }
   delete(id, callback) {
-    const sql = 'DELETE FROM kategori WHERE id_kategori = ?';
+    const sql = 'DELETE FROM Kategori WHERE id_kategori = ?';
     this.db.query(sql, [id], (err, result) => {
       if (err) return callback(err);
       callback(null);

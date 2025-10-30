@@ -13,7 +13,7 @@ class Supplier {
      all (callback) {
     const query = `
       SELECT id_supplier, nama_supplier, email, no_telp, notes, CREATED_AT, UPDATED_AT
-      FROM supplier
+      FROM Supplier
     `;
     this.db.query(query, (err, results) => {
       if (err) {
@@ -39,7 +39,7 @@ class Supplier {
 
   save (supplier, callback) {
     const query = `
-      INSERT INTO supplier (nama_supplier, email, no_telp, notes)
+      INSERT INTO Supplier (nama_supplier, email, no_telp, notes)
       VALUES (?, ?, ?, ?)
     `;
     const values = [
@@ -61,7 +61,7 @@ class Supplier {
   }
 
   find(id, callback) {
-    const sql = 'SELECT * FROM supplier WHERE id_supplier = ?';
+    const sql = 'SELECT * FROM Supplier WHERE id_supplier = ?';
     this.db.query(sql, [id], (err, rows) => {
       if (err) return callback(err);
       callback(null, rows[0]);
@@ -69,12 +69,12 @@ class Supplier {
   }
 
   update(id, data, callback) {
-    const sql = 'UPDATE supplier SET nama_supplier = ?, email = ?, no_telp = ?, notes = ? WHERE id_supplier = ?';
+    const sql = 'UPDATE Supplier SET nama_supplier = ?, email = ?, no_telp = ?, notes = ? WHERE id_supplier = ?';
     const values = [data.nama_supplier, data.email, data.no_telp, data.notes];
     this.db.query(sql, values, callback);
   }
   delete(id, callback) {
-    const sql = 'DELETE FROM supplier WHERE id_supplier = ?';
+    const sql = 'DELETE FROM Supplier WHERE id_supplier = ?';
     this.db.query(sql, [id], (err, result) => {
       if (err) return callback(err);
       callback(null);

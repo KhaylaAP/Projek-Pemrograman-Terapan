@@ -1,9 +1,6 @@
 const Inventory = require('../model/Inventory');
 
-// Controller Inventory
 const inventoryController = {
-
-  // Menampilkan semua data inventory
   index: (req, res) => {
     const model = new Inventory();
     model.all((err, data) => {
@@ -11,16 +8,17 @@ const inventoryController = {
         console.error('Error mengambil data inventory:', err);
         return res.status(500).send('Gagal mengambil data inventory');
       }
-      res.render('inventory/index', { inventory: data });
+      res.render('inventory/index', { 
+        inventory: data,
+        title: 'Inventory Management'
+      });
     });
   },
 
-  // ➕ Form tambah data inventory
   create: (req, res) => {
-    res.render('inventory/create');
+    res.render('inventory/create', { title: 'Add Inventory' });
   },
 
-  // Simpan data inventory baru
   store: (req, res) => {
     const newInventory = {
       id_produk: req.body.id_produk,
@@ -39,7 +37,6 @@ const inventoryController = {
     });
   },
 
-  // Menampilkan form edit inventory berdasarkan ID
   edit: (req, res) => {
     const id = req.params.id;
     const model = new Inventory();
@@ -51,11 +48,13 @@ const inventoryController = {
       if (!inventory) {
         return res.status(404).send('Inventory tidak ditemukan');
       }
-      res.render('inventory/edit', { inventory });
+      res.render('inventory/edit', { 
+        inventory,
+        title: 'Edit Inventory'
+      });
     });
   },
 
-  // Update data inventory berdasarkan ID
   update: (req, res) => {
     const id = req.params.id;
     const updatedData = {
@@ -75,7 +74,6 @@ const inventoryController = {
     });
   },
 
-  // Hapus data inventory berdasarkan ID
   destroy: (req, res) => {
     const id = req.params.id;
     const model = new Inventory();
@@ -87,7 +85,6 @@ const inventoryController = {
       res.redirect('/inventory');
     });
   }
-
 };
 
 module.exports = inventoryController;

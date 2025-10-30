@@ -24,7 +24,7 @@ class Produk {
                 p.jumlah_stok, 
                 p.CREATED_AT, 
                 p.UPDATED_AT
-            FROM produk p
+            FROM Produk p
         `;
         this.db.query(query, (err, results) => {
             if (err) {
@@ -53,7 +53,7 @@ class Produk {
 
     save(produk, callback) {
         const validateKategori = new Promise((resolve, reject) => {
-            this.db.query('SELECT id_kategori FROM kategori WHERE id_kategori = ?', [produk.id_kategori], (err, results) => {
+            this.db.query('SELECT id_kategori FROM Kategori WHERE id_kategori = ?', [produk.id_kategori], (err, results) => {
                 if (err) reject(err);
                 else if (results.length === 0) reject(new Error(`Kategori dengan ID ${produk.id_kategori} tidak ditemukan`));
                 else resolve();
@@ -61,7 +61,7 @@ class Produk {
         });
 
         const validateSupplier = new Promise((resolve, reject) => {
-            this.db.query('SELECT id_supplier FROM supplier WHERE id_supplier = ?', [produk.id_supplier], (err, results) => {
+            this.db.query('SELECT id_supplier FROM Supplier WHERE id_supplier = ?', [produk.id_supplier], (err, results) => {
                 if (err) reject(err);
                 else if (results.length === 0) reject(new Error(`Supplier dengan ID ${produk.id_supplier} tidak ditemukan`));
                 else resolve();
@@ -70,7 +70,7 @@ class Produk {
 
         Promise.all([validateKategori, validateSupplier])
             .then(() => {
-                const query = 'INSERT INTO produk (id_kategori, id_supplier, kode_produk, merk, model, ukuran, harga, jumlah_stok) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+                const query = 'INSERT INTO Produk (id_kategori, id_supplier, kode_produk, merk, model, ukuran, harga, jumlah_stok) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
                 const values = [
                     produk.id_kategori,
                     produk.id_supplier,
@@ -99,7 +99,7 @@ class Produk {
     }
 
     find(id, callback) {
-        const sql = 'SELECT * FROM produk WHERE id_produk = ?';
+        const sql = 'SELECT * FROM Produk WHERE id_produk = ?';
         this.db.query(sql, [id], (err, rows) => {
             if (err) return callback(err);
             
@@ -116,7 +116,7 @@ class Produk {
         
         if (data.id_kategori) {
             validations.push(new Promise((resolve, reject) => {
-                this.db.query('SELECT id_kategori FROM kategori WHERE id_kategori = ?', [data.id_kategori], (err, results) => {
+                this.db.query('SELECT id_kategori FROM Kategori WHERE id_kategori = ?', [data.id_kategori], (err, results) => {
                     if (err) reject(err);
                     else if (results.length === 0) reject(new Error(`Kategori dengan ID ${data.id_kategori} tidak ditemukan`));
                     else resolve();
@@ -126,7 +126,7 @@ class Produk {
 
         if (data.id_supplier) {
             validations.push(new Promise((resolve, reject) => {
-                this.db.query('SELECT id_supplier FROM supplier WHERE id_supplier = ?', [data.id_supplier], (err, results) => {
+                this.db.query('SELECT id_supplier FROM Supplier WHERE id_supplier = ?', [data.id_supplier], (err, results) => {
                     if (err) reject(err);
                     else if (results.length === 0) reject(new Error(`Supplier dengan ID ${data.id_supplier} tidak ditemukan`));
                     else resolve();
@@ -136,7 +136,7 @@ class Produk {
 
         Promise.all(validations)
             .then(() => {
-                const sql = 'UPDATE produk SET id_kategori = ?, id_supplier = ?, kode_produk = ?, merk = ?, model = ?, ukuran = ?, harga = ?, jumlah_stok = ? WHERE id_produk = ?';
+                const sql = 'UPDATE Produk SET id_kategori = ?, id_supplier = ?, kode_produk = ?, merk = ?, model = ?, ukuran = ?, harga = ?, jumlah_stok = ? WHERE id_produk = ?';
                 const values = [
                     data.id_kategori,
                     data.id_supplier,
@@ -154,7 +154,7 @@ class Produk {
     }
 
     delete(id, callback) {
-        const sql = 'DELETE FROM produk WHERE id_produk = ?';
+        const sql = 'DELETE FROM Produk WHERE id_produk = ?';
         this.db.query(sql, [id], (err, result) => {
             if (err) return callback(err);
             callback(null);

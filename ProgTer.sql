@@ -33,7 +33,7 @@ CREATE TABLE `Inventory` (
   PRIMARY KEY (`id_inventory`),
   KEY `Inventory_Produk_FK` (`id_produk`),
   CONSTRAINT `Inventory_Produk_FK` FOREIGN KEY (`id_produk`) REFERENCES `Produk` (`id_produk`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `Inventory` (
 
 LOCK TABLES `Inventory` WRITE;
 /*!40000 ALTER TABLE `Inventory` DISABLE KEYS */;
+INSERT INTO `Inventory` VALUES (1,1,'Straight Leg','28,30,32,34,36,38','50',NULL,NULL),(2,2,'Regular Fit','30,32,34,36,38,40','75',NULL,NULL);
 /*!40000 ALTER TABLE `Inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +60,7 @@ CREATE TABLE `Kategori` (
   `CREATED_AT` timestamp NULL DEFAULT NULL,
   `UPDATED_AT` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +69,7 @@ CREATE TABLE `Kategori` (
 
 LOCK TABLES `Kategori` WRITE;
 /*!40000 ALTER TABLE `Kategori` DISABLE KEYS */;
+INSERT INTO `Kategori` VALUES (1,'Jeans','Various types of jeans',NULL,NULL),(2,'T-Shirts','Cotton t-shirts and casual wear',NULL,NULL),(3,'Jackets','Winter and casual jackets',NULL,NULL);
 /*!40000 ALTER TABLE `Kategori` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +99,7 @@ CREATE TABLE `Produk` (
   KEY `Produk_Supplier_FK` (`id_supplier`),
   CONSTRAINT `Produk_Kategori_FK` FOREIGN KEY (`id_kategori`) REFERENCES `Kategori` (`id_kategori`),
   CONSTRAINT `Produk_Supplier_FK` FOREIGN KEY (`id_supplier`) REFERENCES `Supplier` (`id_supplier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,6 +108,7 @@ CREATE TABLE `Produk` (
 
 LOCK TABLES `Produk` WRITE;
 /*!40000 ALTER TABLE `Produk` DISABLE KEYS */;
+INSERT INTO `Produk` VALUES (1,1,1,'JNS001','Levi\'s','501 Original','28-38',89.99,50,NULL,NULL,NULL),(2,1,1,'JNS002','Wrangler','Regular Fit','30-40',79.99,75,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Produk` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +128,7 @@ CREATE TABLE `Supplier` (
   `CREATED_AT` timestamp NULL DEFAULT NULL,
   `UPDATED_AT` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_supplier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,6 +137,7 @@ CREATE TABLE `Supplier` (
 
 LOCK TABLES `Supplier` WRITE;
 /*!40000 ALTER TABLE `Supplier` DISABLE KEYS */;
+INSERT INTO `Supplier` VALUES (1,'Denim Master Inc.','contact@denimmaster.com','+1-555-0101','Premium denim supplier',NULL,NULL),(2,'Fashion Wear Ltd.','info@fashionwear.com','+1-555-0102','General clothing supplier',NULL,NULL);
 /*!40000 ALTER TABLE `Supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -146,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-17  4:59:21
+-- Dump completed on 2025-10-31  6:28:11

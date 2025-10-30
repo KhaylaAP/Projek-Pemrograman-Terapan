@@ -5,12 +5,13 @@ const routes = require('./route/route');
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.set('views', './pages');
+app.set('views', path.join(__dirname, 'pages'));
 
 app.use(express.static('public'));
 app.use('/uploads', express.static('public/uploads'));
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use(routes); 
 

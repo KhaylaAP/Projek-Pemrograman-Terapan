@@ -20,7 +20,7 @@ class Inventory {
                 i.kuantitas, 
                 i.CREATED_AT, 
                 i.UPDATED_AT
-            FROM inventory i
+            FROM Inventory i
         `;
         this.db.query(query, (err, results) => {
             if (err) {
@@ -45,7 +45,7 @@ class Inventory {
 
     save(inventory, callback) {
         const validateProduk = new Promise((resolve, reject) => {
-            this.db.query('SELECT id_produk FROM produk WHERE id_produk = ?', [inventory.id_produk], (err, results) => {
+            this.db.query('SELECT id_produk FROM Produk WHERE id_produk = ?', [inventory.id_produk], (err, results) => {
                 if (err) reject(err);
                 else if (results.length === 0) reject(new Error(`Produk dengan ID ${inventory.id_produk} tidak ditemukan`));
                 else resolve();
@@ -55,7 +55,7 @@ class Inventory {
         validateProduk
             .then(() => {
                 const query = `
-                    INSERT INTO inventory (id_produk, tipe_jeans, total_jmlh_ukuran, kuantitas)
+                    INSERT INTO Inventory (id_produk, tipe_jeans, total_jmlh_ukuran, kuantitas)
                     VALUES (?, ?, ?, ?)
                 `;
                 const values = [
@@ -85,7 +85,7 @@ class Inventory {
         const sql = `
             SELECT 
                 i.*
-            FROM inventory i
+            FROM Inventory i
             WHERE i.id_inventory = ?
         `;
         this.db.query(sql, [id], (err, rows) => {
@@ -102,7 +102,7 @@ class Inventory {
     update(id, data, callback) {
         if (data.id_produk) {
             const validateProduk = new Promise((resolve, reject) => {
-                this.db.query('SELECT id_produk FROM produk WHERE id_produk = ?', [data.id_produk], (err, results) => {
+                this.db.query('SELECT id_produk FROM Produk WHERE id_produk = ?', [data.id_produk], (err, results) => {
                     if (err) reject(err);
                     else if (results.length === 0) reject(new Error(`Produk dengan ID ${data.id_produk} tidak ditemukan`));
                     else resolve();
@@ -120,7 +120,7 @@ class Inventory {
     }
 
     performUpdate(id, data, callback) {
-        const sql = 'UPDATE inventory SET id_produk = ?, tipe_jeans = ?, total_jmlh_ukuran = ?, kuantitas = ? WHERE id_inventory = ?';
+        const sql = 'UPDATE Inventory SET id_produk = ?, tipe_jeans = ?, total_jmlh_ukuran = ?, kuantitas = ? WHERE id_inventory = ?';
         const values = [
             data.id_produk,
             data.tipe_jeans,
@@ -132,7 +132,7 @@ class Inventory {
     }
 
     delete(id, callback) {
-        const sql = 'DELETE FROM inventory WHERE id_inventory = ?';
+        const sql = 'DELETE FROM Inventory WHERE id_inventory = ?';
         this.db.query(sql, [id], (err, result) => {
             if (err) return callback(err);
             callback(null);
