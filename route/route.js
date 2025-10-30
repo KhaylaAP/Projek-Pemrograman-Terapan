@@ -12,11 +12,6 @@ const inventoryController = require('../controllers/inventoryController');
 // folder public untuk file statis (gambar, css, js frontend)
 router.use(express.static('public'));
 
-// ====== ROUTE DASHBOARD ======
-router.get('/', (req, res) => {
-  res.render('dashboard'); // nanti arahkan ke file dashboard.ejs atau html
-});
-
 // ====== ROUTE PRODUK ======
 router.get('/produk', produkController.index);
 router.get('/produk/create', produkController.create);
@@ -49,4 +44,10 @@ router.get('/inventory/edit/:id', inventoryController.edit);
 router.post('/inventory/update/:id', inventoryController.update);
 router.get('/inventory/delete/:id', inventoryController.destroy);
 
+// ====== ROUTE DASHBOARD ======
+router.get('/', (req, res) => {
+  res.render('dashboard'); // nanti arahkan ke file dashboard.ejs atau html
+});
+
 module.exports = router;
+
