@@ -69,7 +69,7 @@ CREATE TABLE `Kategori` (
 
 LOCK TABLES `Kategori` WRITE;
 /*!40000 ALTER TABLE `Kategori` DISABLE KEYS */;
-INSERT INTO `Kategori` VALUES (1,'Jeans','Various types of jeans',NULL,NULL),(2,'T-Shirts','Cotton t-shirts and casual wear',NULL,NULL),(3,'Jackets','Winter and casual jackets',NULL,NULL);
+INSERT INTO `Kategori` VALUES (1,'Skinny Jeans','Form-fitting jeans that taper at the ankle',NULL,NULL),(2,'Straight Leg','Classic straight-cut jeans from hip to ankle',NULL,NULL),(3,'Bootcut','Jeans that flare slightly at the bottom to accommodate boots',NULL,NULL);
 /*!40000 ALTER TABLE `Kategori` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +108,7 @@ CREATE TABLE `Produk` (
 
 LOCK TABLES `Produk` WRITE;
 /*!40000 ALTER TABLE `Produk` DISABLE KEYS */;
-INSERT INTO `Produk` VALUES (1,1,1,'JNS001','Levi\'s','501 Original','28-38',89.99,50,NULL,NULL,NULL),(2,1,1,'JNS002','Wrangler','Regular Fit','30-40',79.99,75,NULL,NULL,NULL);
+INSERT INTO `Produk` VALUES (1,1,1,'JNS001','Levi\'s','501 Original','28-38',89.99,50,NULL,NULL,NULL),(2,2,1,'JNS002','Wrangler','Regular Fit','30-40',79.99,75,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Produk` ENABLE KEYS */;
 UNLOCK TABLES;
 
