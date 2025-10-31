@@ -70,7 +70,7 @@ class Supplier {
 
   update(id, data, callback) {
     const sql = 'UPDATE Supplier SET nama_supplier = ?, email = ?, no_telp = ?, notes = ? WHERE id_supplier = ?';
-    const values = [data.nama_supplier, data.email, data.no_telp, data.notes];
+    const values = [data.nama_supplier, data.email, data.no_telp, data.notes, id];
     this.db.query(sql, values, callback);
   }
   delete(id, callback) {

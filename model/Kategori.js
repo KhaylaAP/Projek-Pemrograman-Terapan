@@ -66,7 +66,7 @@ class Kategori {
 
   update(id, data, callback) {
     const sql = 'UPDATE Kategori SET nama_kategori = ?, deskripsi = ? WHERE id_kategori = ?';
-    const values = [data.nama_kategori, data.deskripsi];
+    const values = [data.nama_kategori, data.deskripsi, id];
     this.db.query(sql, values, callback);
   }
   delete(id, callback) {
