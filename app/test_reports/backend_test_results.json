@@ -1,0 +1,118 @@
+{
+  "timestamp": "2025-10-30T10:16:13.585782",
+  "total_tests": 22,
+  "passed_tests": 22,
+  "success_rate": 100.0,
+  "test_results": [
+    {
+      "test": "Root API Endpoint",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Login - Valid Credentials",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Login - Invalid Credentials",
+      "success": true,
+      "details": "Status: 401"
+    },
+    {
+      "test": "Dashboard Stats",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Get Suppliers - Initial",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Create Supplier",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Get Specific Supplier",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Update Supplier",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Get Suppliers - After Create",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Get Inventory - Initial",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Create Inventory Item",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Get Specific Inventory Item",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Update Inventory Item",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Search Inventory - By Color",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Search Inventory - By SKU",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Create Item for Transactions",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Receive Stock",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Ship Stock",
+      "success": true,
+      "details": "Status: 200"
+    },
+    {
+      "test": "Ship Stock - Insufficient Stock",
+      "success": true,
+      "details": "Status: 400"
+    },
+    {
+      "test": "Get Non-existent Supplier",
+      "success": true,
+      "details": "Status: 404"
+    },
+    {
+      "test": "Get Non-existent Inventory Item",
+      "success": true,
+      "details": "Status: 404"
+    },
+    {
+      "test": "Delete Non-existent Inventory Item",
+      "success": true,
+      "details": "Status: 404"
+    }
+  ]
+}
