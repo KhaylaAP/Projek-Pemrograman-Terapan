@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link active">Produk</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Edit Product</h1>
+            <a href="/produk" class="btn btn-secondary">Back to Products</a>
+        </header>
+
+        <div class="form-container">
+            <form action="/produk/update/<%= produk.id_produk %>" method="POST" class="form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="kode_produk">Product Code:</label>
+                        <input type="text" id="kode_produk" name="kode_produk" value="<%= produk.kode_produk %>" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="merk">Brand:</label>
+                        <input type="text" id="merk" name="merk" value="<%= produk.merk %>" required class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="model">Model:</label>
+                        <input type="text" id="model" name="model" value="<%= produk.model %>" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ukuran">Size:</label>
+                        <input type="text" id="ukuran" name="ukuran" value="<%= produk.ukuran %>" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="harga">Price:</label>
+                        <input type="number" id="harga" name="harga" value="<%= produk.harga %>" step="0.01" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jumlah_stok">Stock Quantity:</label>
+                        <input type="number" id="jumlah_stok" name="jumlah_stok" value="<%= produk.jumlah_stok %>" required class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="id_kategori">Category:</label>
+                        <select id="id_kategori" name="id_kategori" required class="form-control">
+                            <option value="">Select Category</option>
+                            <% if (kategori && kategori.length > 0) { %>
+                                <% kategori.forEach(function(cat) { %>
+                                    <option value="<%= cat.id_kategori %>" <%= cat.id_kategori == produk.id_kategori ? 'selected' : '' %>>
+                                        <%= cat.nama_kategori %>
+                                    </option>
+                                <% }); %>
+                            <% } %>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_supplier">Supplier:</label>
+                        <select id="id_supplier" name="id_supplier" required class="form-control">
+                            <option value="">Select Supplier</option>
+                            <% if (supplier && supplier.length > 0) { %>
+                                <% supplier.forEach(function(sup) { %>
+                                    <option value="<%= sup.id_supplier %>" <%= sup.id_supplier == produk.id_supplier ? 'selected' : '' %>>
+                                        <%= sup.nama_supplier %>
+                                    </option>
+                                <% }); %>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                    <a href="/produk" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

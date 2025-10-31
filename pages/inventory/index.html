@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Produk</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link active">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Inventory Management</h1>
+            <a href="/inventory/create" class="btn btn-primary">Add New Inventory Item</a>
+        </header>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product ID</th>
+                        <th>Jeans Type</th>
+                        <th>Available Sizes</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (inventory && inventory.length > 0) { %>
+                        <% inventory.forEach(function(item) { %>
+                            <tr>
+                                <td><%= item.id_inventory %></td>
+                                <td><%= item.id_produk %></td>
+                                <td><%= item.tipe_jeans %></td>
+                                <td><%= item.total_jmlh_ukuran %></td>
+                                <td><%= item.kuantitas %></td>
+                                <td class="action-buttons">
+                                    <a href="/inventory/edit/<%= item.id_inventory %>" class="btn btn-sm btn-edit">Edit</a>
+                                    <a href="/inventory/delete/<%= item.id_inventory %>" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6" class="no-data">No inventory items found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

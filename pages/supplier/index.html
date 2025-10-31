@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Produk</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link active">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Supplier Management</h1>
+            <a href="/supplier/create" class="btn btn-primary">Add New Supplier</a>
+        </header>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Supplier Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (supplier && supplier.length > 0) { %>
+                        <% supplier.forEach(function(sup) { %>
+                            <tr>
+                                <td><%= sup.id_supplier %></td>
+                                <td><%= sup.nama_supplier %></td>
+                                <td><%= sup.email %></td>
+                                <td><%= sup.no_telp %></td>
+                                <td><%= sup.notes %></td>
+                                <td class="action-buttons">
+                                    <a href="/supplier/edit/<%= sup.id_supplier %>" class="btn btn-sm btn-edit">Edit</a>
+                                    <a href="/supplier/delete/<%= sup.id_supplier %>" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6" class="no-data">No suppliers found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

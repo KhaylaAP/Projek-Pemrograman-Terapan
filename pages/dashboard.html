@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Produk</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Dashboard</h1>
+            <p>Overview of your jeans inventory management system</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Products</h3>
+                <div class="stat-number" id="total-products">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Categories</h3>
+                <div class="stat-number" id="total-categories">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Suppliers</h3>
+                <div class="stat-number" id="total-suppliers">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Inventory Items</h3>
+                <div class="stat-number" id="total-inventory">0</div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="action-buttons">
+                <a href="/produk/create" class="btn btn-primary">Add New Product</a>
+                <a href="/inventory/create" class="btn btn-secondary">Manage Inventory</a>
+                <a href="/supplier/create" class="btn btn-success">Add Supplier</a>
+                <a href="/kategori/create" class="btn btn-info">Add Category</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
