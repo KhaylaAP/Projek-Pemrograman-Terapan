@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Supplier - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link active">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Edit Supplier</h1>
+            <a href="/supplier" class="btn btn-secondary">Back to Suppliers</a>
+        </header>
+
+        <div class="form-container">
+            <form action="/supplier/update/<%= supplier.id_supplier %>" method="POST" class="form">
+                <div class="form-group">
+                    <label for="nama_supplier">Supplier Name:</label>
+                    <input type="text" id="nama_supplier" name="nama_supplier" value="<%= supplier.nama_supplier %>" required class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= supplier.email %>" required class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="no_telp">Phone Number:</label>
+                    <input type="text" id="no_telp" name="no_telp" value="<%= supplier.no_telp %>" required class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" name="notes" rows="4" class="form-control"><%= supplier.notes %></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Update Supplier</button>
+                    <a href="/supplier" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link active">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Add New Category</h1>
+            <a href="/kategori" class="btn btn-secondary">Back to Categories</a>
+        </header>
+
+        <div class="form-container">
+            <form action="/kategori/create" method="POST" class="form">
+                <div class="form-group">
+                    <label for="nama_kategori">Category Name:</label>
+                    <input type="text" id="nama_kategori" name="nama_kategori" required class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="deskripsi">Description:</label>
+                    <textarea id="deskripsi" name="deskripsi" rows="4" class="form-control"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                    <a href="/kategori" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

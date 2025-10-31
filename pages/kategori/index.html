@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategori - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link active">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Kategori Management</h1>
+            <a href="/kategori/create" class="btn btn-primary">Add New Category</a>
+        </header>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (kategori && kategori.length > 0) { %>
+                        <% kategori.forEach(function(cat) { %>
+                            <tr>
+                                <td><%= cat.id_kategori %></td>
+                                <td><%= cat.nama_kategori %></td>
+                                <td><%= cat.deskripsi %></td>
+                                <td class="action-buttons">
+                                    <a href="/kategori/edit/<%= cat.id_kategori %>" class="btn btn-sm btn-edit">Edit</a>
+                                    <a href="/kategori/delete/<%= cat.id_kategori %>" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="4" class="no-data">No categories found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

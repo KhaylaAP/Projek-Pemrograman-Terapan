@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Inventory - Jeans Inventory</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link active">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Add New Inventory Item</h1>
+            <a href="/inventory" class="btn btn-secondary">Back to Inventory</a>
+        </header>
+
+        <div class="form-container">
+            <form action="/inventory/create" method="POST" class="form">
+                <div class="form-group">
+                    <label for="id_produk">Product ID:</label>
+                    <input type="number" id="id_produk" name="id_produk" required class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipe_jeans">Jeans Type:</label>
+                    <input type="text" id="tipe_jeans" name="tipe_jeans" required class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="total_jmlh_ukuran">Available Sizes:</label>
+                    <input type="text" id="total_jmlh_ukuran" name="total_jmlh_ukuran" placeholder="e.g., 28,30,32,34" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="kuantitas">Quantity:</label>
+                    <input type="number" id="kuantitas" name="kuantitas" required class="form-control">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Inventory Item</button>
+                    <a href="/inventory" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
