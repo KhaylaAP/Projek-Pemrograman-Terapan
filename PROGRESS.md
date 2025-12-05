@@ -35,3 +35,23 @@
 2372039 – Khayla Allegra Pratama : Membuat file awal docker untuk docker compose
 
 2372059 – Syahrial Achmad : Membuat file-file controller
+
+-------------------------------------------------------------------------------------------------------
+
+27 Oct 2025 - 4 Nov 2025
+
+2372011 – Elika Natalie :  Membuat halaman-halaman final html
+
+2372039 – Khayla Allegra Pratama : Menyambungkan front end dengan backend dan memastikan web dapat run dengan docker 
+
+2372059 – Syahrial Achmad : Memperbaiki route dan controller
+
+-------------------------------------------------------------------------------------------------------
+
+1 Dec 2025 - 5 Dec 2025
+
+2372011 – Elika Natalie : Menentukan menambahkan log in dan log out user dan untuk menambah halaman log
+
+2372039 – Khayla Allegra Pratama : Menentukan menambahkan log in dan log out user dan untuk menambah halaman log
+
+2372059 – Syahrial Achmad : Menentukan menambahkan log in dan log out user dan untuk menambah halaman log
