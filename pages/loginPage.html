@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- TailwindCSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <title>Login Page</title>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md shadow-lg border border-gray-200 bg-white rounded-xl">
+        
+        <!-- Header -->
+        <div class="text-center space-y-4 p-6">
+        <div class="flex justify-center">
+            <div class="bg-blue-100 p-4 rounded-full">
+            <i data-lucide="package" class="h-12 w-12 text-blue-600"></i>
+            </div>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900">Welcome Back</h2>
+        <p class="text-gray-600">Login to access your inventory management system</p>
+        </div>
+
+        <!-- Form -->
+        <div class="p-6 pt-0">
+        <form class="space-y-4" id="login-form">
+
+            <!-- Username -->
+            <div class="space-y-2">
+            <label for="username" class="text-gray-700 font-medium">Username</label>
+            <input
+                id="username"
+                type="text"
+                placeholder="Enter your username"
+                required
+                class="w-full border border-gray-300 px-3 py-2 rounded-md focus:border-blue-600 focus:ring-blue-600"
+            />
+            </div>
+
+            <!-- Password -->
+            <div class="space-y-2">
+            <label for="password" class="text-gray-700 font-medium">Password</label>
+            <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                required
+                class="w-full border border-gray-300 px-3 py-2 rounded-md focus:border-blue-600 focus:ring-blue-600"
+            />
+            </div>
+
+            <!-- Button -->
+            <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-medium"
+            >
+            Login
+            </button>
+
+        </form>
+
+        <!-- Demo credentials -->
+        <div class="mt-4 text-center text-sm text-gray-600">
+            <p>Demo credentials: admin / admin123</p>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Optional: fake login action
+        document.getElementById("login-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            alert("Login clicked (HTML version)");
+        });
+    </script>
+
+</body>
+</html>
