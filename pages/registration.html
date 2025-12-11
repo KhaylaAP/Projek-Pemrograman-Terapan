@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white shadow-lg border border-gray-200 rounded-xl p-6">
+
+    <div class="text-center space-y-3 mb-6">
+      <div class="flex justify-center">
+        <div class="bg-blue-100 p-4 rounded-full">
+          <!-- Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 00-3-3.87M12 7a4 4 0 110-8 4 4 0 010 8zm0 0v3m0 4v6" />
+          </svg>
+        </div>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-900">Create an Account</h1>
+      <p class="text-gray-600">Register to access your inventory management system</p>
+    </div>
+
+    <form class="space-y-4">
+      <div class="space-y-1">
+        <label class="text-gray-700 font-medium">Username</label>
+        <input type="text" placeholder="Enter your username" required
+          class="w-full border-gray-300 focus:ring-blue-600 focus:border-blue-600 rounded-md" />
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-gray-700 font-medium">Email</label>
+        <input type="email" placeholder="Enter your email" required
+          class="w-full border-gray-300 focus:ring-blue-600 focus:border-blue-600 rounded-md" />
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-gray-700 font-medium">Password</label>
+        <input type="password" placeholder="Enter your password" required
+          class="w-full border-gray-300 focus:ring-blue-600 focus:border-blue-600 rounded-md" />
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-gray-700 font-medium">Confirm Password</label>
+        <input type="password" placeholder="Re-enter your password" required
+          class="w-full border-gray-300 focus:ring-blue-600 focus:border-blue-600 rounded-md" />
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-medium">
+        Register
+      </button>
+    </form>
+
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Already have an account? <a href="./login.html" class="text-blue-600 hover:underline">Login here</a>
+    </p>
+
+  </div>
+</body>
+</html>
