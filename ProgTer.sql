@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.42, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.4.6, for Linux (x86_64)
 --
 -- Host: localhost    Database: ProgTer
 -- ------------------------------------------------------
--- Server version	8.0.42
+-- Server version	8.4.6
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -69,7 +69,7 @@ CREATE TABLE `Kategori` (
 
 LOCK TABLES `Kategori` WRITE;
 /*!40000 ALTER TABLE `Kategori` DISABLE KEYS */;
-INSERT INTO `Kategori` VALUES (1,'Skinny Jeans','Form-fitting jeans that taper at the ankle',NULL,NULL),(2,'Straight Leg','Classic straight-cut jeans from hip to ankle',NULL,NULL),(3,'Bootcut','Jeans that flare slightly at the bottom to accommodate boots',NULL,NULL);
+INSERT INTO `Kategori` VALUES (1,'Jeans','Various types of jeans',NULL,NULL),(2,'T-Shirts','Cotton t-shirts and casual wear',NULL,NULL),(3,'Jackets','Winter and casual jackets',NULL,NULL);
 /*!40000 ALTER TABLE `Kategori` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +108,7 @@ CREATE TABLE `Produk` (
 
 LOCK TABLES `Produk` WRITE;
 /*!40000 ALTER TABLE `Produk` DISABLE KEYS */;
-INSERT INTO `Produk` VALUES (1,1,1,'JNS001','Levi\'s','501 Original','28-38',89.99,50,NULL,NULL,NULL),(2,2,1,'JNS002','Wrangler','Regular Fit','30-40',79.99,75,NULL,NULL,NULL);
+INSERT INTO `Produk` VALUES (1,1,1,'JNS001','Levi\'s','501 Original','28-38',89.99,50,NULL,NULL,NULL),(2,1,1,'JNS002','Wrangler','Regular Fit','30-40',79.99,75,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Produk` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,6 +140,33 @@ LOCK TABLES `Supplier` WRITE;
 INSERT INTO `Supplier` VALUES (1,'Denim Master Inc.','contact@denimmaster.com','+1-555-0101','Premium denim supplier',NULL,NULL),(2,'Fashion Wear Ltd.','info@fashionwear.com','+1-555-0102','General clothing supplier',NULL,NULL);
 /*!40000 ALTER TABLE `Supplier` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `User`
+--
+
+DROP TABLE IF EXISTS `User`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `User` (
+  `id_user` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT NULL,
+  `UPDATED_AT` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES (1,'admin','admin123',NULL,NULL);
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -150,4 +177,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-31  6:28:11
+-- Dump completed on 2025-12-11 16:39:49
