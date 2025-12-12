@@ -3,84 +3,213 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- TailwindCSS (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <title>Login Page</title>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
-
-    <div class="w-full max-w-md shadow-lg border border-gray-200 bg-white rounded-xl">
+    <title>Login - Jeans Inventory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        <!-- Header -->
-        <div class="text-center space-y-4 p-6">
-        <div class="flex justify-center">
-            <div class="bg-blue-100 p-4 rounded-full">
-            <i data-lucide="package" class="h-12 w-12 text-blue-600"></i>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F5F9FF;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .login-container {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-icon {
+            background-color: #3498db;
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+        
+        .login-header h2 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .login-header p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .error-message {
+            background-color: #fee;
+            color: #c0392b;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1px solid #f5c6cb;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-block {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .demo-credentials {
+            text-align: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px dashed #dee2e6;
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-top: 1.5rem;
+        }
+        
+        .demo-credentials p {
+            margin: 0;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+            }
+            
+            .login-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .login-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-icon">
+                📦
             </div>
+            <h2>Welcome Back</h2>
+            <p>Login to access your inventory management system</p>
         </div>
-        <h2 class="text-2xl font-bold text-gray-900">Welcome Back</h2>
-        <p class="text-gray-600">Login to access your inventory management system</p>
+
+        <% if (error) { %>
+        <div class="error-message">
+            <%= error %>
         </div>
+        <% } %>
 
-        <!-- Form -->
-        <div class="p-6 pt-0">
-        <form class="space-y-4" id="login-form">
-
-            <!-- Username -->
-            <div class="space-y-2">
-            <label for="username" class="text-gray-700 font-medium">Username</label>
-            <input
-                id="username"
-                type="text"
-                placeholder="Enter your username"
-                required
-                class="w-full border border-gray-300 px-3 py-2 rounded-md focus:border-blue-600 focus:ring-blue-600"
-            />
+        <form method="POST" action="/login">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="Enter your username"
+                    required
+                    class="form-control"
+                />
             </div>
 
-            <!-- Password -->
-            <div class="space-y-2">
-            <label for="password" class="text-gray-700 font-medium">Password</label>
-            <input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                required
-                class="w-full border border-gray-300 px-3 py-2 rounded-md focus:border-blue-600 focus:ring-blue-600"
-            />
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                    class="form-control"
+                />
             </div>
 
-            <!-- Button -->
-            <button
-            type="submit"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-medium"
-            >
-            Login
+            <button type="submit" class="btn btn-primary btn-block">
+                Login
             </button>
-
         </form>
 
         <!-- Demo credentials -->
-        <div class="mt-4 text-center text-sm text-gray-600">
-            <p>Demo credentials: admin / admin123</p>
-        </div>
+        <div class="demo-credentials">
+            <p><strong>Demo credentials:</strong> admin / admin123</p>
         </div>
     </div>
-
-    <script>
-        lucide.createIcons();
-
-        // Optional: fake login action
-        document.getElementById("login-form").addEventListener("submit", function(e) {
-            e.preventDefault();
-            alert("Login clicked (HTML version)");
-        });
-    </script>
-
 </body>
 </html>

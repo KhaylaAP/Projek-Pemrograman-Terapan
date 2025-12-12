@@ -1,7 +1,12 @@
 const User = require('../model/User');
+const loggedInUsers = {};
 
 const userController = {
   index: (req, res) => {
+    if (!req.cookies.userId) {
+      return res.redirect('/');
+    }
+    
     const model = new User();
     model.all((err, data) => {
       if (err) {
@@ -16,10 +21,18 @@ const userController = {
   },
 
   create: (req, res) => {
+    if (!req.cookies.userId) {
+      return res.redirect('/');
+    }
+    
     res.render('user/create', { title: 'Add User' });
   },
 
   store: (req, res) => {
+    if (!req.cookies.userId) {
+      return res.redirect('/');
+    }
+    
     const newUser = {
       username: req.body.username,
       password: req.body.password
@@ -36,6 +49,10 @@ const userController = {
   },
 
   edit: (req, res) => {
+    if (!req.cookies.userId) {
+      return res.redirect('/');
+    }
+    
     const id = req.params.id;
     const model = new User();
     model.find(id, (err, user) => {
@@ -54,6 +71,10 @@ const userController = {
   },
 
   update: (req, res) => {
+    if (!req.cookies.userId) {
+      return res.redirect('/');
+    }
+    
     const id = req.params.id;
     const updatedData = {
       username: req.body.username,
@@ -71,6 +92,10 @@ const userController = {
   },
 
   destroy: (req, res) => {
+    if (!req.cookies.userId) {
+      return res.redirect('/');
+    }
+    
     const id = req.params.id;
     const model = new User();
     model.delete(id, (err) => {
@@ -83,35 +108,87 @@ const userController = {
   },
 
   showLogin: (req, res) => {
-    res.render('user/login', { title: 'Login' });
+    if (req.cookies.userId && loggedInUsers[req.cookies.userId]) {
+      return res.redirect('/dashboard');
+    }
+    
+    const error = req.query.error || null;
+    res.render('loginPage', { 
+      title: 'Login',
+      error: error
+    });
   },
 
   login: (req, res) => {
     const { username, password } = req.body;
     const model = new User();
 
+    console.log('Login attempt for user:', username);
+
     model.findByUsername(username, (err, user) => {
       if (err) {
-        console.error('Error login:', err);
-        return res.status(500).send('Gagal proses login');
+        console.error('Database error during login:', err);
+        return res.redirect('/?error=System+error.+Please+try+again.');
       }
+      
       if (!user) {
-        return res.status(401).send('Username tidak ditemukan');
+        console.log('User not found:', username);
+        return res.redirect('/?error=Invalid+username+or+password');
       }
+      
       if (user.password !== password) {
-        return res.status(401).send('Password salah');
+        console.log('Incorrect password for user:', username);
+        return res.redirect('/?error=Invalid+username+or+password');
       }
-
-      req.session.userId = user.id_user;
-      req.session.username = user.username;
+      
+      console.log('Login successful for:', username);
+      
+      loggedInUsers[user.id_user] = {
+        id: user.id_user,
+        username: user.username,
+        loginTime: new Date()
+      };
+      
+      res.cookie('userId', user.id_user, { maxAge: 24 * 60 * 60 * 1000 });
+      res.cookie('username', user.username, { maxAge: 24 * 60 * 60 * 1000 });
       
       res.redirect('/dashboard');
     });
   },
 
   logout: (req, res) => {
-    req.session.destroy();
-    res.redirect('/login');
+    if (req.cookies.userId) {
+      delete loggedInUsers[req.cookies.userId];
+    }
+    
+    res.clearCookie('userId');
+    res.clearCookie('username');
+    
+    res.redirect('/');
+  },
+
+  showDashboard: (req, res) => {
+    const userId = req.cookies.userId;
+    
+    if (!userId || !loggedInUsers[userId]) {
+      return res.redirect('/?error=Please+login+first');
+    }
+    
+    res.render('dashboard', {
+      title: 'Dashboard',
+      username: req.cookies.username || 'User'
+    });
+  },
+  
+  requireLogin: (req, res, next) => {
+    const userId = req.cookies.userId;
+    
+    if (!userId || !loggedInUsers[userId]) {
+      console.log('User not logged in, redirecting to login');
+      return res.redirect('/?error=Please+login+first');
+    }
+    
+    next();
   }
 };
 

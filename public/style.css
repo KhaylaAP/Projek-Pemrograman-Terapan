@@ -317,4 +317,184 @@ body {
     .stats-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Login body */
+    .login-body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* Login container */
+    .login-container {
+        background: white;
+        width: 100%;
+        max-width: 400px;
+        padding: 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Login header */
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .login-icon {
+        background-color: #3498db;
+        color: white;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-size: 2rem;
+    }
+
+    .login-header h2 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+    }
+
+    .login-header p {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* Error message */
+    .error-message {
+        background-color: #fee;
+        color: #c0392b;
+        padding: 0.75rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        border: 1px solid #f5c6cb;
+        font-size: 0.9rem;
+    }
+
+    /* Login form */
+    .login-form {
+        margin-bottom: 1rem;
+    }
+
+    .login-form .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .login-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #495057;
+        font-size: 0.95rem;
+    }
+
+    .login-form .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .login-form .form-control:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+
+    .login-form .btn-block {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Demo credentials */
+    .demo-credentials {
+        text-align: center;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        border: 1px dashed #dee2e6;
+        font-size: 0.875rem;
+        color: #6c757d;
+        margin-top: 1.5rem;
+    }
+
+    .demo-credentials p {
+        margin: 0;
+    }
+
+    /* Button styles (make sure they're defined) */
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: white;
+        border: 1px solid #2980b9;
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+    }
+
+    .btn-block {
+        width: 100%;
+        display: block;
+    }
+
+    /* Form group styles (make sure they're defined) */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Responsive adjustments for login page */
+    @media (max-width: 480px) {
+        .login-container {
+            padding: 1.5rem;
+        }
+        
+        .login-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+        
+        .login-header h2 {
+            font-size: 1.5rem;
+        }
+    }
 }

@@ -1,53 +1,63 @@
-// routes/route.js
 const express = require('express');
-const path = require('path');
 const router = express.Router();
 
-// import controller
+// Import controllers
+const userController = require('../controller/UserController');
 const produkController = require('../controller/ProdukController');
 const supplierController = require('../controller/SupplierController');
 const kategoriController = require('../controller/KategoriController');
 const inventoryController = require('../controller/InventoryController');
 
-// folder public untuk file statis (gambar, css, js frontend)
+// Static files
 router.use(express.static('public'));
 
-// ====== ROUTE PRODUK ======
-router.get('/produk', produkController.index);
-router.get('/produk/create', produkController.create);
-router.post('/produk/create', produkController.store);
-router.get('/produk/edit/:id', produkController.edit);
-router.post('/produk/update/:id', produkController.update);
-router.get('/produk/delete/:id', produkController.destroy);
+// ====== USER ROUTES ======
+router.get('/user', userController.requireLogin, userController.index);
+router.get('/user/create', userController.requireLogin, userController.create);
+router.post('/user/create', userController.requireLogin, userController.store);
+router.get('/user/edit/:id', userController.requireLogin, userController.edit);
+router.post('/user/update/:id', userController.requireLogin, userController.update);
+router.get('/user/delete/:id', userController.requireLogin, userController.destroy);
 
-// ====== ROUTE SUPPLIER ======
-router.get('/supplier', supplierController.index);
-router.get('/supplier/create', supplierController.create);
-router.post('/supplier/create', supplierController.store);
-router.get('/supplier/edit/:id', supplierController.edit);
-router.post('/supplier/update/:id', supplierController.update);
-router.get('/supplier/delete/:id', supplierController.destroy);
+// ====== PRODUCT ROUTES ======
+router.get('/produk', userController.requireLogin, produkController.index);
+router.get('/produk/create', userController.requireLogin, produkController.create);
+router.post('/produk/create', userController.requireLogin, produkController.store);
+router.get('/produk/edit/:id', userController.requireLogin, produkController.edit);
+router.post('/produk/update/:id', userController.requireLogin, produkController.update);
+router.get('/produk/delete/:id', userController.requireLogin, produkController.destroy);
 
-// ====== ROUTE KATEGORI ======
-router.get('/kategori', kategoriController.index);
-router.get('/kategori/create', kategoriController.create);
-router.post('/kategori/create', kategoriController.store);
-router.get('/kategori/edit/:id', kategoriController.edit);
-router.post('/kategori/update/:id', kategoriController.update);
-router.get('/kategori/delete/:id', kategoriController.destroy);
+// ====== SUPPLIER ROUTES ======
+router.get('/supplier', userController.requireLogin, supplierController.index);
+router.get('/supplier/create', userController.requireLogin, supplierController.create);
+router.post('/supplier/create', userController.requireLogin, supplierController.store);
+router.get('/supplier/edit/:id', userController.requireLogin, supplierController.edit);
+router.post('/supplier/update/:id', userController.requireLogin, supplierController.update);
+router.get('/supplier/delete/:id', userController.requireLogin, supplierController.destroy);
 
-// ====== ROUTE INVENTORY ======
-router.get('/inventory', inventoryController.index);
-router.get('/inventory/create', inventoryController.create);
-router.post('/inventory/create', inventoryController.store);
-router.get('/inventory/edit/:id', inventoryController.edit);
-router.post('/inventory/update/:id', inventoryController.update);
-router.get('/inventory/delete/:id', inventoryController.destroy);
+// ====== CATEGORY ROUTES ======
+router.get('/kategori', userController.requireLogin, kategoriController.index);
+router.get('/kategori/create', userController.requireLogin, kategoriController.create);
+router.post('/kategori/create', userController.requireLogin, kategoriController.store);
+router.get('/kategori/edit/:id', userController.requireLogin, kategoriController.edit);
+router.post('/kategori/update/:id', userController.requireLogin, kategoriController.update);
+router.get('/kategori/delete/:id', userController.requireLogin, kategoriController.destroy);
 
-// ====== ROUTE DASHBOARD ======
-router.get('/', (req, res) => {
-  res.render('dashboard'); // nanti arahkan ke file dashboard.ejs atau html
-});
+// ====== INVENTORY ROUTES ======
+router.get('/inventory', userController.requireLogin, inventoryController.index);
+router.get('/inventory/create', userController.requireLogin, inventoryController.create);
+router.post('/inventory/create', userController.requireLogin, inventoryController.store);
+router.get('/inventory/edit/:id', userController.requireLogin, inventoryController.edit);
+router.post('/inventory/update/:id', userController.requireLogin, inventoryController.update);
+router.get('/inventory/delete/:id', userController.requireLogin, inventoryController.destroy);
+
+// ====== DASHBOARD ======
+router.get('/dashboard', userController.showDashboard);
+
+// ====== PUBLIC ROUTES ======
+router.get('/', userController.showLogin);
+router.get('/login', userController.showLogin);
+router.post('/login', userController.login);
+router.get('/logout', userController.logout);
 
 module.exports = router;
-

@@ -55,3 +55,13 @@
 2372039 – Khayla Allegra Pratama : Menentukan menambahkan log in dan log out user dan untuk menambah halaman log
 
 2372059 – Syahrial Achmad : Menentukan menambahkan log in dan log out user dan untuk menambah halaman log
+
+-------------------------------------------------------------------------------------------------------
+
+8 Dec 2025 - 12 Dec 2025
+
+2372011 – Elika Natalie : Menambahkan halaman login, register, dan log(untuk mencatat user siapa melakukan apa)
+
+2372039 – Khayla Allegra Pratama : Update database, model, controller untuk menambah user & memastikan login bekerja
+
+2372059 – Syahrial Achmad : Membuat business process untuk web dalam file README
