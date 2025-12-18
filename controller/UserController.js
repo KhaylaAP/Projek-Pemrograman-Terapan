@@ -189,7 +189,50 @@ const userController = {
     }
     
     next();
-  }
+  },
+
+  showRegister: (req, res) => {
+    const error = req.query.error || null;
+    const success = req.query.success || null;
+
+    res.render('registration', { 
+      title: 'Register',
+      error: error,
+      success: success
+    });
+  },
+
+  register: (req, res) => {
+    const { username, password, confirmPassword } = req.body;
+    if (!username || !password || !confirmPassword) {
+      return res.redirect('/register?error=All fields are required');
+    }
+    if (password !== confirmPassword) {
+      return res.redirect('/register?error=Passwords do not match');
+    }
+
+    if (password.length > 16) {
+      return res.redirect('/register?error=Password must be 16 characters or less');
+    }
+
+    if (username.length > 25) {
+      return res.redirect('/register?error=Username must be 25 characters or less');
+
+    }
+
+    const model = new User();
+    model.save({ username, password }, (err) => {
+    if (err) {
+      console.error('Error registering user:', err.message);
+      let errorMsg = err.message;
+      if (err.message.includes('Username already exists')) {
+        errorMsg = 'Username already exists. Please choose another.';
+      }
+      return res.redirect('/register?error=' + encodeURIComponent(errorMsg));
+    }
+    res.redirect('/?success=Registration successful! Please log in.');
+    });
+  },
 };
 
 module.exports = userController;

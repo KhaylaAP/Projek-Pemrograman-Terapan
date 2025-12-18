@@ -38,23 +38,18 @@ class User {
     }
 
     save(user, callback) {
-        const query = `
-            INSERT INTO User (username, password)
-            VALUES (?, ?)
-        `;
-        const values = [
-            user.username,
-            user.password
-        ];
+        this.db.query('SELECT id_user FROM User WHERE username = ?', [user.username], (err, results) => {
+            if (err) return callback(err);
+            if (results.length > 0) return callback(new Error('Username already exists'));
 
-        this.db.query(query, values, (err, results) => {
-            if (err) {
-                this.db.end();
-                return callback(err);
-            }
+            const query = `INSERT INTO User (username, password) VALUES (?, ?)`;
+            const values = [user.username, user.password];
 
+            this.db.query(query, values, (err, results) => {
+            if (err) return callback(err);
             this.db.end();
             callback(null, { userId: results.insertId });
+            });
         });
     }
 
