@@ -1,4 +1,5 @@
 const Inventory = require('../model/Inventory');
+const Log = require('../model/Log');
 
 const inventoryController = {
   index: (req, res) => {
@@ -33,6 +34,17 @@ const inventoryController = {
         console.error('Error menyimpan inventory:', err.message);
         return res.status(500).send(`Gagal menambah inventory: ${err.message}`);
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'CREATE',
+        entity: 'Inventory',
+        details: `Created inventory item for product ID ${newInventory.id_produk}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/inventory');
     });
   },
@@ -70,6 +82,17 @@ const inventoryController = {
         console.error('Error memperbarui inventory:', err.message);
         return res.status(500).send(`Gagal memperbarui inventory: ${err.message}`);
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'UPDATE',
+        entity: 'Inventory',
+        details: `Updated inventory item with ID ${id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/inventory');
     });
   },
@@ -82,6 +105,17 @@ const inventoryController = {
         console.error('Error menghapus inventory:', err);
         return res.status(500).send('Gagal menghapus inventory');
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'DELETE',
+        entity: 'Inventory',
+        details: `Deleted inventory item with ID ${id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/inventory');
     });
   }

@@ -2,6 +2,7 @@
 const Produk = require('../model/Produk');
 const Kategori = require('../model/Kategori');
 const Supplier = require('../model/Supplier');
+const Log = require('../model/Log');
 
 const produkController = {
   // [GET] /produk
@@ -56,6 +57,17 @@ const produkController = {
         console.error('Error saving produk:', err.message);
         return res.status(500).send(err.message);
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'CREATE',
+        entity: 'Product',
+        details: `Created product with ID ${result.produkId}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/produk');
     });
   },
@@ -106,6 +118,17 @@ const produkController = {
         console.error('Error updating produk:', err.message);
         return res.status(500).send(err.message);
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'UPDATE',
+        entity: 'Product',
+        details: `Updated product with ID ${req.params.id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/produk');
     });
   },
@@ -118,6 +141,17 @@ const produkController = {
         console.error('Error deleting produk:', err);
         return res.status(500).send('Gagal menghapus produk.');
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'DELETE',
+        entity: 'Product',
+        details: `Deleted product with ID ${req.params.id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/produk');
     });
   }

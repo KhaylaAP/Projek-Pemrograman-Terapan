@@ -1,5 +1,6 @@
 // controllers/supplierController.js
 const Supplier = require('../model/Supplier');
+const Log = require('../model/Log');
 
 const supplierController = {
   // [GET] /supplier
@@ -34,6 +35,17 @@ const supplierController = {
         console.error('Error saving supplier:', err);
         return res.status(500).send('Gagal menyimpan supplier.');
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'CREATE',
+        entity: 'Supplier',
+        details: `Created supplier with name "${newSupplier.nama_supplier}"`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/supplier');
     });
   },
@@ -67,6 +79,17 @@ const supplierController = {
         console.error('Error updating supplier:', err);
         return res.status(500).send('Gagal memperbarui supplier.');
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'UPDATE',
+        entity: 'Supplier',
+        details: `Updated supplier with ID ${req.params.id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/supplier');
     });
   },
@@ -79,6 +102,17 @@ const supplierController = {
         console.error('Error deleting supplier:', err);
         return res.status(500).send('Gagal menghapus supplier.');
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'DELETE',
+        entity: 'Supplier',
+        details: `Deleted supplier with ID ${req.params.id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/supplier');
     });
   }

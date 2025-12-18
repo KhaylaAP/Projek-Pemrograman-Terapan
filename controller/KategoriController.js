@@ -1,5 +1,5 @@
 const Kategori = require('../model/Kategori');
-const kategoriModel = new Kategori();
+const Log = require('../model/Log');
 
 const kategoriController = {
 
@@ -30,6 +30,17 @@ const kategoriController = {
         console.error(err);
         return res.status(500).send('Gagal menambah kategori');
       }
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'CREATE',
+        entitiy: 'Category',
+        details: `Created category with name "${newKategori.nama_kategori}"`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/kategori');
     });
   },
@@ -54,6 +65,17 @@ const kategoriController = {
     const model = new Kategori();
     model.update(id, data, (err) => {
       if (err) return res.status(500).send('Gagal memperbarui kategori');
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'UPDATE',
+        entitiy: 'Category',
+        details: `Updated category with ID ${id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/kategori');
     });
   },
@@ -63,6 +85,17 @@ const kategoriController = {
     const model = new Kategori();
     model.delete(id, (err) => {
       if (err) return res.status(500).send('Gagal menghapus kategori');
+      
+      const log = new Log();
+      log.save({
+        id_user: req.cookies.userId,
+        action: 'DELETE',
+        entitiy: 'Category',
+        details: `Deleted category with ID ${id}`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/kategori');
     });
   },

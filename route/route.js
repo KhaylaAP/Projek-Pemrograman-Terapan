@@ -7,6 +7,7 @@ const produkController = require('../controller/ProdukController');
 const supplierController = require('../controller/SupplierController');
 const kategoriController = require('../controller/KategoriController');
 const inventoryController = require('../controller/InventoryController');
+const logController = require('../controller/LogController');
 
 // Static files
 router.use(express.static('public'));
@@ -50,6 +51,10 @@ router.post('/inventory/create', userController.requireLogin, inventoryControlle
 router.get('/inventory/edit/:id', userController.requireLogin, inventoryController.edit);
 router.post('/inventory/update/:id', userController.requireLogin, inventoryController.update);
 router.get('/inventory/delete/:id', userController.requireLogin, inventoryController.destroy);
+
+// ====== LOG ROUTES ======
+router.get('/userlog', userController.requireLogin, logController.showLogs);
+router.get('/api/logs', userController.requireLogin, logController.index);
 
 // ====== DASHBOARD ======
 router.get('/dashboard', userController.showDashboard);

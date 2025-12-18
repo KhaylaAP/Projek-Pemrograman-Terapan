@@ -1,276 +1,317 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>User Activity Log — Read Only</title>
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* small cosmetic tweaks */
-        .table-scroll { max-height: 56vh; overflow: auto; }
-        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", monospace; }
-    </style>
-    </head>
-    <body class="bg-gray-50 min-h-screen p-6">
-    <div class="max-w-6xl mx-auto">
-        <header class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-900">User Activity Log (Read‑Only)</h1>
-        <p class="text-sm text-gray-600 mt-1">A responsive, read-only front-end to view user actions. No data is modified here.</p>
-        </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>User Activity Log — Read Only</title>
+<link rel="stylesheet" href="/style.css">
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    /* small cosmetic tweaks */
+    .table-scroll { max-height: 56vh; overflow: auto; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", monospace; }
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Jeans Inventory</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/inventory" class="nav-link">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/supplier" class="nav-link">Supplier</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/userlog" class="nav-link">User Logs</a>
+                </li>
+                <li class="nav-item" style="margin-left: auto;">
+                    <a href="/logout" class="nav-link" style="background-color: #e74c3c;">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-        <section class="bg-white rounded-lg shadow p-4">
-        <!-- Controls -->
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
-            <div class="flex-1 flex gap-3">
-            <div class="w-full md:w-72">
-                <label for="q" class="sr-only">Search</label>
-                <input id="q" type="search" placeholder="Search user, action, resource, detail..." class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            </div>
+<div class="p-6">
+<div class="max-w-6xl mx-auto">
+    <header class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">User Activity Log (Read‑Only)</h1>
+    <p class="text-sm text-gray-600 mt-1">A responsive, read-only front-end to view user actions. No data is modified here.</p>
+    </header>
 
-            <div class="flex gap-2">
-                <label for="from" class="sr-only">From</label>
-                <input id="from" type="date" class="border rounded px-3 py-2" />
-                <label for="to" class="sr-only">To</label>
-                <input id="to" type="date" class="border rounded px-3 py-2" />
-            </div>
-
-            <div>
-                <select id="severityFilter" class="border rounded px-3 py-2">
-                <option value="">All severities</option>
-                <option value="info">Info</option>
-                <option value="warning">Warning</option>
-                <option value="error">Error</option>
-                </select>
-            </div>
-            </div>
-
-            <div class="flex items-center gap-2">
-            
-            <button id="refreshBtn" class="bg-blue-600 text-white px-3 py-2 rounded text-sm hover:bg-blue-700">Refresh</button>
-            </div>
+    <section class="bg-white rounded-lg shadow p-4">
+    <!-- Controls -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+        <div class="flex-1 flex gap-3">
+        <div class="w-full md:w-72">
+            <label for="q" class="sr-only">Search</label>
+            <input id="q" type="search" placeholder="Search user, action, entity, detail..." class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
 
-        <!-- Table -->
-        <div class="table-scroll border rounded">
-            <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50 sticky top-0">
-                <tr>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Timestamp</th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">User</th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Action</th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Resource</th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Details</th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Severity</th>
-                </tr>
-            </thead>
-            <tbody id="log-body"></tbody>
-            </table>
+        <div class="flex gap-2">
+            <label for="from" class="sr-only">From</label>
+            <input id="from" type="date" class="border rounded px-3 py-2" />
+            <label for="to" class="sr-only">To</label>
+            <input id="to" type="date" class="border rounded px-3 py-2" />
         </div>
 
-        <!-- Pagination -->
-        <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
-            <div id="summary">Showing 0 of 0</div>
-            <div class="flex items-center gap-2">
-            <button id="prevPage" class="px-3 py-1 border rounded disabled:opacity-50">Prev</button>
-            <span id="pageInfo" class="mono">1</span>
-            <button id="nextPage" class="px-3 py-1 border rounded disabled:opacity-50">Next</button>
-            </div>
+        <div>
+            <select id="severityFilter" class="border rounded px-3 py-2">
+            <option value="">All severities</option>
+            <option value="info">Info</option>
+            <option value="warning">Warning</option>
+            <option value="error">Error</option>
+            </select>
+        </div>
         </div>
 
-        </section>
-
-        <footer class="mt-6 text-xs text-gray-500">Read-only viewer • Last updated: <span id="lastUpdated">—</span></footer>
-    </div>
-
-    <!-- Details drawer (read-only) -->
-    <div id="drawer" class="fixed inset-0 bg-black/40 hidden">
-        <div class="absolute right-0 top-0 h-full w-full md:w-1/3 bg-white shadow-lg p-4 overflow-auto">
-        <button id="closeDrawer" class="mb-4 text-gray-500 hover:text-gray-700">Close</button>
-        <h3 class="text-lg font-semibold mb-2">Log details</h3>
-        <pre id="detailPre" class="bg-gray-50 p-3 rounded text-sm"></pre>
+        <div class="flex items-center gap-2">
+        
+        <button id="refreshBtn" class="bg-blue-600 text-white px-3 py-2 rounded text-sm hover:bg-blue-700">Refresh</button>
         </div>
     </div>
 
-    <script>
-        // Sample static data. Replace by fetching from an API if available.
-        const sampleLogs = [
-        { id: 1, ts: '2025-12-05T09:12:03Z', user: 'hannah.lee', action: 'LOGIN', resource: 'Auth', details: 'Successful login from 192.168.1.12', severity: 'info' },
-        { id: 2, ts: '2025-12-05T09:15:42Z', user: 'mila.park', action: 'CREATE', resource: 'Product', details: 'Created product {"sku":"ABC123","name":"Widget"}', severity: 'info' },
-        { id: 3, ts: '2025-12-05T10:01:12Z', user: 'naya.jeong', action: 'DELETE', resource: 'Product', details: 'Deleted product sku=XYZ999', severity: 'warning' },
-        { id: 4, ts: '2025-12-05T11:22:56Z', user: 'seorin', action: 'UPDATE', resource: 'Inventory', details: 'Adjusted stock for sku=ABC123 from 20 to 18', severity: 'info' },
-        { id: 5, ts: '2025-12-05T12:05:00Z', user: 'admin', action: 'LOGIN_FAILED', resource: 'Auth', details: 'Failed login for user admin from 10.0.0.5', severity: 'error' },
-        // more sample rows...
-        ];
+    <!-- Table -->
+    <div class="table-scroll border rounded">
+        <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50 sticky top-0">
+            <tr>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Timestamp</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">User</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Action</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Entity</th> 
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Details</th>
+            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500">Severity</th>
+            </tr>
+        </thead>
+        <tbody id="log-body"></tbody>
+        </table>
+    </div>
 
-        // State
-        let logs = [...sampleLogs];
-        let filtered = logs.slice();
-        let page = 1;
-        const pageSize = 8;
+    <!-- Pagination -->
+    <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
+        <div id="summary">Showing 0 of 0</div>
+        <div class="flex items-center gap-2">
+        <button id="prevPage" class="px-3 py-1 border rounded disabled:opacity-50">Prev</button>
+        <span id="pageInfo" class="mono">1</span>
+        <button id="nextPage" class="px-3 py-1 border rounded disabled:opacity-50">Next</button>
+        </div>
+    </div>
 
-        // Elements
-        const tableBody = document.getElementById('tableBody');
-        const qInput = document.getElementById('q');
-        const fromInput = document.getElementById('from');
-        const toInput = document.getElementById('to');
-        const severityFilter = document.getElementById('severityFilter');
-        const summary = document.getElementById('summary');
-        const pageInfo = document.getElementById('pageInfo');
-        const prevBtn = document.getElementById('prevPage');
-        const nextBtn = document.getElementById('nextPage');
-        const lastUpdated = document.getElementById('lastUpdated');
-        const exportBtn = document.getElementById('exportBtn');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const drawer = document.getElementById('drawer');
-        const detailPre = document.getElementById('detailPre');
-        const closeDrawer = document.getElementById('closeDrawer');
+    </section>
 
-        // Utilities
-        function formatLocal(ts) {
-        try {
-            const d = new Date(ts);
-            return d.toLocaleString();
-        } catch(e) { return ts; }
+    <footer class="mt-6 text-xs text-gray-500">Read-only viewer • Last updated: <span id="lastUpdated">—</span></footer>
+</div>
+
+<!-- Details drawer (read-only) -->
+<div id="drawer" class="fixed inset-0 bg-black/40 hidden">
+    <div class="absolute right-0 top-0 h-full w-full md:w-1/3 bg-white shadow-lg p-4 overflow-auto">
+    <button id="closeDrawer" class="mb-4 text-gray-500 hover:text-gray-700">Close</button>
+    <h3 class="text-lg font-semibold mb-2">Log details</h3>
+    <pre id="detailPre" class="bg-gray-50 p-3 rounded text-sm"></pre>
+    </div>
+</div>
+
+<script>
+    // State
+    let logs = [];
+    let filtered = logs.slice();
+    let page = 1;
+    const pageSize = 8;
+
+    // Elements
+    const tableBody = document.getElementById('log-body');  // Fixed: Was 'tableBody', now matches HTML ID
+    const qInput = document.getElementById('q');
+    const fromInput = document.getElementById('from');
+    const toInput = document.getElementById('to');
+    const severityFilter = document.getElementById('severityFilter');
+    const summary = document.getElementById('summary');
+    const pageInfo = document.getElementById('pageInfo');
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    const lastUpdated = document.getElementById('lastUpdated');
+    const exportBtn = document.getElementById('exportBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const drawer = document.getElementById('drawer');
+    const detailPre = document.getElementById('detailPre');
+    const closeDrawer = document.getElementById('closeDrawer');
+
+    // Utilities
+    function formatLocal(ts) {
+    try {
+        const d = new Date(ts);
+        return d.toLocaleString();
+    } catch(e) { return ts; }
+    }
+
+    function applyFilters() {
+    const q = qInput.value.trim().toLowerCase();
+    const from = fromInput.value ? new Date(fromInput.value) : null;
+    const to = toInput.value ? new Date(toInput.value) : null;
+    const sev = severityFilter.value;
+
+    filtered = logs.filter(l => {
+        if (sev && l.severity !== sev) return false;
+        if (q) {
+        const hay = (l.user + ' ' + l.action + ' ' + l.entity + ' ' + l.details).toLowerCase();  // Updated to 'entity'
+        if (!hay.includes(q)) return false;
         }
+        if (from) {
+        const d = new Date(l.ts);
+        if (d < from) return false;
+        }
+        if (to) {
+        const d = new Date(l.ts);
+        // include the entire 'to' day
+        const dayEnd = new Date(to); dayEnd.setHours(23,59,59,999);
+        if (d > dayEnd) return false;
+        }
+        return true;
+    });
 
-        function applyFilters() {
-        const q = qInput.value.trim().toLowerCase();
-        const from = fromInput.value ? new Date(fromInput.value) : null;
-        const to = toInput.value ? new Date(toInput.value) : null;
-        const sev = severityFilter.value;
+    page = 1; // reset page
+    render();
+    }
 
-        filtered = logs.filter(l => {
-            if (sev && l.severity !== sev) return false;
-            if (q) {
-            const hay = (l.user + ' ' + l.action + ' ' + l.resource + ' ' + l.details).toLowerCase();
-            if (!hay.includes(q)) return false;
-            }
-            if (from) {
-            const d = new Date(l.ts);
-            if (d < from) return false;
-            }
-            if (to) {
-            const d = new Date(l.ts);
-            // include the entire 'to' day
-            const dayEnd = new Date(to); dayEnd.setHours(23,59,59,999);
-            if (d > dayEnd) return false;
-            }
-            return true;
+    function render() {
+    // pagination
+    const total = filtered.length;
+    const pages = Math.max(1, Math.ceil(total / pageSize));
+    if (page > pages) page = pages;
+    const start = (page - 1) * pageSize;
+    const slice = filtered.slice(start, start + pageSize);
+
+    tableBody.innerHTML = '';
+    slice.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = '';
+        tr.innerHTML = `
+        <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700">${formatLocal(row.ts)}</div></td>
+        <td class="px-4 py-3 align-top"><div class="text-sm font-medium text-gray-900">${row.user}</div></td>
+        <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700">${row.action}</div></td>
+        <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700">${row.entity}</div></td>  <!-- Updated to 'entity' -->
+        <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700 truncate max-w-md" title="${escapeHtml(row.details)}">${escapeHtml(row.details)}</div></td>
+        <td class="px-4 py-3 align-top"><div class="text-sm">${renderSeverity(row.severity)}</div></td>
+        `;
+
+        // click to view details
+        tr.addEventListener('click', () => {
+        detailPre.textContent = JSON.stringify(row, null, 2);
+        drawer.classList.remove('hidden');
         });
 
-        page = 1; // reset page
-        render();
-        }
+        tableBody.appendChild(tr);
+    });
 
-        function render() {
-        // pagination
-        const total = filtered.length;
-        const pages = Math.max(1, Math.ceil(total / pageSize));
-        if (page > pages) page = pages;
-        const start = (page - 1) * pageSize;
-        const slice = filtered.slice(start, start + pageSize);
+    summary.textContent = `Showing ${Math.min(total, start + 1)}–${Math.min(total, start + slice.length)} of ${total}`;
+    pageInfo.textContent = `${page} / ${pages}`;
+    prevBtn.disabled = page <= 1;
+    nextBtn.disabled = page >= pages;
+    lastUpdated.textContent = new Date().toLocaleString();
+    }
 
-        tableBody.innerHTML = '';
-        slice.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.className = '';
-            tr.innerHTML = `
-            <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700">${formatLocal(row.ts)}</div></td>
-            <td class="px-4 py-3 align-top"><div class="text-sm font-medium text-gray-900">${row.user}</div></td>
-            <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700">${row.action}</div></td>
-            <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700">${row.resource}</div></td>
-            <td class="px-4 py-3 align-top"><div class="text-sm text-gray-700 truncate max-w-md" title="${escapeHtml(row.details)}">${escapeHtml(row.details)}</div></td>
-            <td class="px-4 py-3 align-top"><div class="text-sm">${renderSeverity(row.severity)}</div></td>
-            `;
+    function renderSeverity(s) {
+    const map = { info: 'Info', warning: 'Warning', error: 'Error' };
+    const label = map[s] || s || '';
+    return `<span class=\"px-2 py-0.5 rounded text-xs font-medium \${s==='error' ? 'bg-red-100 text-red-800' : s==='warning' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}\">${label}</span>`;
+    }
 
-            // click to view details
-            tr.addEventListener('click', () => {
-            detailPre.textContent = JSON.stringify(row, null, 2);
-            drawer.classList.remove('hidden');
-            });
+    function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
 
-            tableBody.appendChild(tr);
-        });
+    // Pagination handlers
+    prevBtn.addEventListener('click', () => { if (page>1) { page--; render(); } });
+    nextBtn.addEventListener('click', () => { page++; render(); });
 
-        summary.textContent = `Showing ${Math.min(total, start + 1)}–${Math.min(total, start + slice.length)} of ${total}`;
-        pageInfo.textContent = `${page} / ${pages}`;
-        prevBtn.disabled = page <= 1;
-        nextBtn.disabled = page >= pages;
-        lastUpdated.textContent = new Date().toLocaleString();
-        }
+    // Filters
+    [qInput, fromInput, toInput, severityFilter].forEach(el => el.addEventListener('input', () => applyFilters()));
 
-        function renderSeverity(s) {
-        const map = { info: 'Info', warning: 'Warning', error: 'Error' };
-        const label = map[s] || s || '';
-        return `<span class=\"px-2 py-0.5 rounded text-xs font-medium \${s==='error' ? 'bg-red-100 text-red-800' : s==='warning' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}\">${label}</span>`;
-        }
+    // Drawer close
+    closeDrawer.addEventListener('click', () => drawer.classList.add('hidden'));
+    drawer.addEventListener('click', (e) => { if (e.target === drawer) drawer.classList.add('hidden'); });
 
-        function escapeHtml(str) {
-        return String(str)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/\"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-        }
-
-        // Pagination handlers
-        prevBtn.addEventListener('click', () => { if (page>1) { page--; render(); } });
-        nextBtn.addEventListener('click', () => { page++; render(); });
-
-        // Filters
-        [qInput, fromInput, toInput, severityFilter].forEach(el => el.addEventListener('input', () => applyFilters()));
-
-        // Drawer close
-        closeDrawer.addEventListener('click', () => drawer.classList.add('hidden'));
-        drawer.addEventListener('click', (e) => { if (e.target === drawer) drawer.classList.add('hidden'); });
-
-        // Export CSV
-        exportBtn.addEventListener('click', () => {
-        const rows = filtered.map(r => ({ ts: r.ts, user: r.user, action: r.action, resource: r.resource, details: r.details, severity: r.severity }));
+    // Export CSV (optional)
+    if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+        const rows = filtered.map(r => ({ ts: r.ts, user: r.user, action: r.action, entity: r.entity, details: r.details, severity: r.severity }));
         const csv = toCSV(rows);
         downloadCSV(csv, `user-activity-${new Date().toISOString().slice(0,10)}.csv`);
-        });
+    });
+    }
 
-        function toCSV(arr) {
-        if (!arr.length) return '';
-        const keys = Object.keys(arr[0]);
-        const lines = [keys.join(',')];
-        for (const obj of arr) {
-            const vals = keys.map(k => '"' + String(obj[k]).replace(/"/g,'""') + '"');
-            lines.push(vals.join(','));
-        }
-        return lines.join('\n');
-        }
+    function toCSV(arr) {
+    if (!arr.length) return '';
+    const keys = Object.keys(arr[0]);
+    const lines = [keys.join(',')];
+    for (const obj of arr) {
+        const vals = keys.map(k => '"' + String(obj[k]).replace(/"/g,'""') + '"');
+        lines.push(vals.join(','));
+    }
+    return lines.join('\n');
+    }
 
-        function downloadCSV(csv, filename) {
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = filename; a.style.display='none';
-        document.body.appendChild(a); a.click();
-        document.body.removeChild(a); URL.revokeObjectURL(url);
-        }
+    function downloadCSV(csv, filename) {
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; a.style.display='none';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    }
 
-        // Refresh (in this static example just re-renders). Replace with API fetch if needed.
-        refreshBtn.addEventListener('click', () => {
-        // Example: fetch from API and replace logs
-        // fetch('/api/logs').then(r=>r.json()).then(data=>{ logs = data; applyFilters(); });
-        render();
-        });
+    refreshBtn.addEventListener('click', () => {
+        loadLogs();
+    });
 
-        // Initialization
-        applyFilters();
+    // Initialization
+    function loadLogs() {
+        fetch('/api/logs')
+            .then(r => r.json())
+            .then(data => {
+                logs = data.map(log => ({
+                    id: log.id_log,
+                    ts: log.timestamp,
+                    user: log.username,
+                    action: log.action,
+                    entity: log.entity,
+                    details: log.details,
+                    severity: log.action === 'DELETE' ? 'error' : log.action === 'UPDATE' ? 'warning' : 'info'
+                }));
+                filtered = logs.slice();
+                applyFilters();
+            })
+            .catch(err => console.error('Error fetching logs:', err));
+    }
 
-        // Accessibility: keyboard support to open details on Enter when row focused
-        tableBody.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const tr = e.target.closest('tr');
-            if (tr) tr.click();
-        }
-        });
+    loadLogs();
 
-    </script>
-    </body>
-    </html>
+    // Accessibility: keyboard support to open details on Enter when row focused
+    tableBody.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const tr = e.target.closest('tr');
+        if (tr) tr.click();
+    }
+    });
+
+</script>
+</body>
+</html>

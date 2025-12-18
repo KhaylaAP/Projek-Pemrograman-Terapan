@@ -1,5 +1,6 @@
 const User = require('../model/User');
 const loggedInUsers = {};
+const Log = require('../model/Log');
 
 const userController = {
   index: (req, res) => {
@@ -152,13 +153,36 @@ const userController = {
       res.cookie('userId', user.id_user, { maxAge: 24 * 60 * 60 * 1000 });
       res.cookie('username', user.username, { maxAge: 24 * 60 * 60 * 1000 });
       
+      const log = new Log();
+      log.save({
+        id_user: user.id_user,
+        action: 'LOGIN',
+        entity: 'User',
+        details: `User ${username} logged in`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
+      
       res.redirect('/dashboard');
     });
   },
 
   logout: (req, res) => {
-    if (req.cookies.userId) {
-      delete loggedInUsers[req.cookies.userId];
+    const userId = req.cookies.userId;
+    const username = req.cookies.username;
+    
+    if (userId) {
+      delete loggedInUsers[userId];
+      
+      const log = new Log();
+      log.save({
+        id_user: userId,
+        action: 'LOGOUT',
+        entity: 'User',
+        details: `User ${username} logged out`
+      }, (logErr) => {
+        if (logErr) console.error('Log error:', logErr);
+      });
     }
     
     res.clearCookie('userId');
@@ -221,7 +245,7 @@ const userController = {
     }
 
     const model = new User();
-    model.save({ username, password }, (err) => {
+    model.save({ username, password }, (err, result) => {
     if (err) {
       console.error('Error registering user:', err.message);
       let errorMsg = err.message;
@@ -230,6 +254,19 @@ const userController = {
       }
       return res.redirect('/register?error=' + encodeURIComponent(errorMsg));
     }
+    
+    const userId = result.userId;
+    
+    const log = new Log();
+    log.save({
+      id_user: userId,
+      action: 'REGISTER',
+      entity: 'User',
+      details: `New user ${username} registered`
+    }, (logErr) => {
+      if (logErr) console.error('Log error:', logErr);
+    });
+    
     res.redirect('/?success=Registration successful! Please log in.');
     });
   },
