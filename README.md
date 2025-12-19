@@ -1,11 +1,30 @@
+* business  process
 1. Login
-
-* Admin masuk ke halaman login.
-* Input username + password.
-* Jika benar → masuk ke dashboard.
-
-2. Dashboard
-* Admin melihat ringkasan: total kategori, total produk, total stok, total supplier.
+ * User masuk ke halaman login.
+ * Di halaman login tersedia tombol/link Register untuk membuat akun baru.
+ * User menginput username + password.
+ * Sistem memverifikasi data:
+   * Jika benar → user masuk ke dashboard.
+   * Jika salah → sistem menampilkan pesan kesalahan.
+     
+2. Registrasi
+* User membuka halaman login.
+* Klik Register.
+* Sistem menampilkan halaman registrasi.
+* User mengisi:
+  * Username
+  * Password
+* Sistem melakukan validasi:
+  * Username tidak boleh sama dengan yang sudah terdaftar
+* Jika valid:
+  * Data akun disimpan
+  * Sistem menampilkan pesan registrasi berhasil
+  * User diarahkan kembali ke halaman login
+* Jika tidak valid:
+  * Sistem menampilkan pesan error
+    
+3. Dashboard
+* User melihat ringkasan: total kategori, total produk, total stok, total supplier.
 * Ada quick actions:
 
   * Add New Product
@@ -15,23 +34,23 @@
 
 MENU CATEGORY*
 
-3. Manage Category
-* Admin membuka halaman Category Management.
+4. Manage Category
+* User membuka halaman Category Management.
 * Melihat daftar kategori (misal: Skinny, Regular, Slim, Cargo).
 
-4. Add Category
+5. Add Category
 * Klik “Add New Category”.
 * Isi:
   * Category Name (misal: Levis, Wrangler, Nevada)
   * Description
 * Klik Save → kategori tersimpan.
 
-5. Edit Category
+6. Edit Category
 * Klik Edit pada kategori tertentu.
 * Ubah nama atau deskripsi.
 * Save.
 
-6. Delete Category
+7. Delete Category
 * Klik Delete → muncul konfirmasi.
 * Jika setuju → kategori terhapus (beserta produk yang terkait jika sistem mengikuti ERD tertentu).
 
@@ -39,10 +58,10 @@ MENU CATEGORY*
 
 MENU PRODUCT
 
-7. Manage Product
-* Admin melihat daftar produk sesuai kategori.
+8. Manage Product
+* User melihat daftar produk sesuai kategori.
 
-8. Add Product
+9. Add Product
 * Klik Add Product.
 * Isi:
   * Nama produk
@@ -53,19 +72,19 @@ MENU PRODUCT
   * Upload gambar
 * Klik Save → produk tersimpan.
 
-9. Edit Product
+10. Edit Product
 * Ubah nama, kategori, harga, ukuran, gambar, dan deskripsi.
 * Save.
 
-10. Delete Product
+11. Delete Product
 * Klik Delete → konfirmasi → produk dihapus.
 
 ---
 
 *MENU INVENTORY*
 
-11. Manage Inventory*
-* Admin melihat stok setiap produk per ukuran.
+12. Manage Inventory*
+* User melihat stok setiap produk per ukuran.
 *12. Add Stock (Barang Masuk)*
 * Pilih produk → klik Add Stock.
 * Isi jumlah barang masuk.
@@ -82,7 +101,7 @@ MENU PRODUCT
 
 MENU SUPPLIER
 15. Manage Supplier
-Admin melihat daftar supplier.
+User melihat daftar supplier.
 
 16. Add Supplier
 * Klik Add Supplier.
@@ -95,11 +114,12 @@ Admin melihat daftar supplier.
 
 17. Edit Supplier*
 * Ubah data supplier → Save.
+  
 18. Delete Supplier*
 * Klik Delete → konfirmasi.
 
 *19. Logout*
-* Admin keluar dari sistem.
+* User keluar dari sistem.
 
 Cara menjalankan docker:
 - buka terminal
