@@ -65,3 +65,13 @@
 2372039 – Khayla Allegra Pratama : Update database, model, controller untuk menambah user & memastikan login bekerja
 
 2372059 – Syahrial Achmad : Membuat business process untuk web dalam file README
+
+-------------------------------------------------------------------------------------------------------
+
+15 Dec 2025 - 19 Dec 2025
+
+2372011 – Elika Natalie : Melengkapi business process
+
+2372039 – Khayla Allegra Pratama : Membuat backend register & backend halaman userlog
+
+2372059 – Syahrial Achmad : Melengkapi business process
