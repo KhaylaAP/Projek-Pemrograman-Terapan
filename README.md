@@ -124,8 +124,10 @@ User melihat daftar supplier.
 Cara menjalankan docker:
 - buka terminal
 - cd ke directory aplikasi
-- jalankan "docker compose up --build" (versi docker compose plugin)
-- jalankan "docker-compose up --build" (versi docker compose)
+- jalankan "docker compose up --build" (versi docker compose plugin, untuk pertama kali build)
+- jalankan "docker-compose up --build" (versi docker compose, untuk pertama kali build)
+- jalankan "docker compose up" (versi docker compose plugin, jika sudah pernah build dan docker compose down)
+- jalankan "docker-compose up" (versi docker compose, jika sudah pernah build dan docker compose down)
 - buka browser
 - masuk ke dalam link "localhost:3000"
 

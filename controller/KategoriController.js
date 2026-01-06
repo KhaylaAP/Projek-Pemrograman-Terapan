@@ -35,7 +35,7 @@ const kategoriController = {
       log.save({
         id_user: req.cookies.userId,
         action: 'CREATE',
-        entitiy: 'Category',
+        entity: 'Category',
         details: `Created category with name "${newKategori.nama_kategori}"`
       }, (logErr) => {
         if (logErr) console.error('Log error:', logErr);
@@ -70,7 +70,7 @@ const kategoriController = {
       log.save({
         id_user: req.cookies.userId,
         action: 'UPDATE',
-        entitiy: 'Category',
+        entity: 'Category',
         details: `Updated category with ID ${id}`
       }, (logErr) => {
         if (logErr) console.error('Log error:', logErr);
@@ -90,7 +90,7 @@ const kategoriController = {
       log.save({
         id_user: req.cookies.userId,
         action: 'DELETE',
-        entitiy: 'Category',
+        entity: 'Category',
         details: `Deleted category with ID ${id}`
       }, (logErr) => {
         if (logErr) console.error('Log error:', logErr);
